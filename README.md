@@ -28,11 +28,11 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`smocks-cli config:set`](#smocks-cli config:set)
-* [`smocks-cli config:get`](#smocks-cli config:get)
-* [`smocks-cli services:pull`](#smocks-cli services:pull)
-* [`smocks-cli services:push`](#smocks-cli services:push)
-* [`smocks-cli contract:push`](#smocks-cli contract:push)
+* [`smocks-cli config:set`](#smocks-cli-config:set)
+* [`smocks-cli config:get`](#smocks-cli-config:get)
+* [`smocks-cli services:pull`](#smocks-cli-services:pull)
+* [`smocks-cli services:push`](#smocks-cli-services:push)
+* [`smocks-cli contract:push`](#smocks-cli-contract:push)
 * [`smocks-cli help [COMMAND]`](#smocks-cli-help-command)
 
 ## `smocks-cli config:set`
