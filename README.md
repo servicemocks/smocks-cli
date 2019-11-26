@@ -61,38 +61,6 @@ OPTIONS
 
 _See code: [src/commands/config/set.js](https://github.com/servicemocks/smocks-cli/blob/v1.0.1/src/commands/config/set.js)_
 
-## `smocks-cli contract:push`
-
-push local swagger spec (.yaml, .json) to servicemocks.com
-
-```
-USAGE
-  $ smocks-cli contract:push
-
-OPTIONS
-  -k, --api-key=api-key      servicemocks.com api key. will pull from saved config otherwise specified
-  -p, --file-path=file-path  (required) file path to contract
-```
-
-_See code: [src/commands/contract/push.js](https://github.com/servicemocks/smocks-cli/blob/v1.0.1/src/commands/contract/push.js)_
-
-## `smocks-cli help [COMMAND]`
-
-display help for smocks-cli
-
-```
-USAGE
-  $ smocks-cli help [COMMAND]
-
-ARGUMENTS
-  COMMAND  command to show help for
-
-OPTIONS
-  --all  see all commands in CLI
-```
-
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
-
 ## `smocks-cli services:pull`
 
 pull and store service definitions locally
@@ -179,6 +147,8 @@ USAGE
   $ smocks-cli contract:push
 
 OPTIONS
+  -k, --api-key=api-key      servicemocks.com api key. will pull from saved config otherwise specified
+  -p, --file-path=file-path  (required) file path to contract
 
 DESCRIPTION
   Pushing your contract will create/update resources and responses
