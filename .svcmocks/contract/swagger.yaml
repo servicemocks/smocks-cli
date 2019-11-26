@@ -1,0 +1,685 @@
+openapi: "3.0.1"
+info:
+  title: Payments
+  description: "SmartPay Payments API"
+  contact:
+    email: "jimmyxu@smartpaylease.com"
+  version: "1.0.0"
+paths:
+  /authorize:
+    post:
+      tags:
+        - authorize card payment
+      summary: authorize card payment
+      operationId: authorize
+      description: use this API to authorize card payments
+      requestBody:
+        description: customer/card information for authorization
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AuthInput"
+      responses:
+        '200':
+          description: "card payment authorization request processed"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/AuthOutput"
+        '400':
+          description: "Error occurred"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/AuthOutput"
+  /capture:
+    post:
+      tags:
+        - capture previously authorized card payment
+      summary: capture previously authorized card payment
+      operationId: capture
+      description: use this API to capture previously authorized card payments
+      requestBody:
+        description: previously authorized request id, amount, and other info
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CaptureInput"
+      responses:
+        '200':
+          description: "capture request processed"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CaptureOutput"
+        '400':
+          description: "Error occurred"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CaptureOutput"
+
+  /reversal:
+    post:
+      tags:
+        - reverse captured card payment
+      summary: reversal captured card payment
+      operationId: reversal
+      description: use this API to reverse captured card payments
+      requestBody:
+        description: previously authorized request id, amount, and other info
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ReversalInput"
+      responses:
+        '200':
+          description: "reversal request processed"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ReversalOutput"
+        '400':
+          description: "Error occurred"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ReversalOutput"
+
+  /refund:
+    post:
+      tags:
+        - refund card payment
+      summary: refund card payment
+      operationId: refund
+      description: use this API to refund card payments
+      requestBody:
+        description: captured transaction id and refund amount or card info and order id if non-worldpay transactions
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/RefundInput"
+      responses:
+        '200':
+          description: "refund request processed"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RefundOutput"
+        '400':
+          description: "Error occurred"
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RefundOutput"
+components:
+  schemas:
+    AuthInput:
+      type: object
+      required:
+        - card_accountNumber
+        - card_cvNumber
+        - card_expirationMonth
+        - card_expirationYear
+        - ccAuthService_partialAuthIndicator
+        - is_avs_auth
+        - merchant_name
+        - merchantReferenceCode
+        - purchaseTotals_grandTotalAmount
+        - uuid
+      properties:
+        app_server:
+          description: indicates which app server sent the request
+          type: string
+          example: app1.sf1.us.billfloat.com
+        billTo_firstName:
+          description: billTo first name
+          type: string
+          example: JOHN
+        billTo_lastName:
+          description: billTo last name
+          type: string
+          example: JONES
+        billTo_street1:
+          description: billTo street address
+          type: string
+          example: 1 Main St.
+        billTo_street2:
+          description: billTo street address line2
+          type: string
+          example:
+        billTo_city:
+          description: billTo city
+          type: string
+          example: Burlington
+        billTo_state:
+          description: billTo state
+          type: string
+          example: MA
+        billTo_postalCode:
+          description: billTo postal code
+          type: string
+          example: 01803-3747
+        billTo_country:
+          description: billTo country
+          type: string
+          example: US
+        billTo_email:
+          description: billTo email address
+          type: string
+          example: MADEUP@GMAIL.COM
+        billTo_ipAddress:
+          description: billTo IP address
+          type: string
+          example: 222.222.222.22
+        billTo_phoneNumber:
+          description: billTo phone number
+          type: string
+          example: 4153334444
+        card_accountNumber:
+          description: card account number
+          type: string
+          example: 4457010000000009
+        card_cvNumber:
+          description: card cv number
+          type: string
+          example: 349
+        card_expirationMonth:
+          description: card expiration month
+          type: string
+          example: 01
+        card_expirationYear:
+          description: card expiration year
+          type: string
+          example: 21
+        ccAuthService_run:
+          description: authorize service run
+          type: boolean
+          example: true
+        ccAuthService_partialAuthIndicator:
+          description: partial authorize indicator
+          type: boolean
+          example: false
+        funder:
+          description: indicates who will be funding this lease
+          type: string
+          example: atalaya_ex_westlake
+        invoiceHeader_merchantDescriptor:
+          description: invoice header merchant descriptor
+          type: string
+          example: SMARTPAY-CHG.COM
+        invoiceHeader_merchantDescriptorContact:
+          description: invoice header merchant descriptor contact
+          type: string
+          example: (844) 467-3561
+        is_avs_auth:
+          description: indicates if we require an AVS check to be performed for this authorization
+          type: boolean
+          example: true
+        item_0_unitPrice:
+          description: item unit price
+          type: string
+          example: 101.00
+        merchant_acquirer:
+          description: merchant acquirer
+          type: string
+          example: worldpay
+        merchant_name:
+          description: merchant name
+          type: string
+          example: Walmart
+        merchantReferenceCode:
+          description: merchant reference code
+          type: string
+          example: OE99WWXX1
+        purchaseTotals_grandTotalAmount:
+          description: total amount in dollars to be authorized
+          type: string
+          example: 101.00
+        purchaseTotals_currency:
+          description: purchase currency used for authorization
+          type: string
+          example: US
+        shipTo_firstName:
+          description: shipTp first name
+          type: string
+          example: John
+        shipTo_lastName:
+          description: shipTp last name
+          type: string
+          example: Jones
+        shipTo_street1:
+          description: shipTo street address
+          type: string
+          example: 1 Main St.
+        shipTo_street2:
+          description: shipTo street address line2
+          type: string
+          example:
+        shipTo_city:
+          description: shipTp city
+          type: string
+          example: Burlington
+        shipTo_state:
+          description: shipTp state
+          type: string
+          example: MA
+        shipTo_postalCode:
+          description: shipTo postal code
+          type: string
+          example: 01803-3747
+        shipTo_country:
+          description: shipTo country
+          type: string
+          example: US
+        uuid:
+          description: unique identifier for request
+          type: string
+          example: 1234567890abcdef1234567890abcdef
+
+    AuthOutput:
+      type: object
+      required:
+        - status
+        - vendor
+        - reply
+      properties:
+        errors:
+          type: array
+          items:
+            description: error message
+            type: string
+            example: Amount should be 0 if and only if the request is AVS
+        reply:
+          "$ref": "#/components/schemas/AuthOutputReply"
+        status:
+          description: status
+          type: string
+          enum:
+            - success
+            - failed
+          example: success
+        vendor:
+          description: payment processor
+          type: string
+          example: worldpay
+    AuthOutputReply:
+      type: object
+      required:
+        - avs_code
+        - ccAuthReply_amount
+        - decision
+      properties:
+        avs_code:
+          description: Smartpay avs response code
+          type: string
+          example: N
+        ccAuthReply_amount:
+          description: approved amount
+          type: string
+          example: 101.00
+        decision:
+          description: indicates if authorization is successful or not
+          type: string
+          enum:
+            - accept
+            - reject
+          example: accept
+        message:
+          description: message
+          type: string
+          example: card_declined
+        orderId:
+          description: order id
+          type: string
+          example: 22244443333
+        raw_response:
+          description: raws response info from payment processor
+          type: object
+          additionalProperties:
+            type: string
+        reasonCode:
+          description: Smartpay response code
+          type: string
+          example: 100
+        requestId:
+          description: authorization transaction id
+          type: string
+          example: 088811
+    CaptureInput:
+      type: object
+      required:
+        - ccCaptureService_authRequestID
+        - merchant_name
+        - uuid
+      properties:
+        app_server:
+          description: indicates which app server sends the request
+          type: string
+          example: app1.sf1.us.billfloat.com
+        ccCaptureService_run:
+          description: capture service run
+          type: boolean
+          example: true
+        ccCaptureService_authRequestID:
+          description: the request id returned by the preceding auth
+          type: string
+          example: 04440B
+        funder:
+          description: indicates who will be funding the lease
+          type: string
+          example: atalaya
+        invoiceHeader_merchantDescriptor:
+          description: invoice header merchant descriptor
+          type: string
+          example: SmartPay-Go Wireless So
+        invoiceHeader_merchantDescriptorContact:
+          description: invoice header merchant descriptor contact
+          type: string
+          example: 925-298-6109
+        merchant_acquirer:
+          description: indicates the payment processor to use to process this capture
+          type: string
+          example: worldpay
+        merchant_name:
+          description: merchant name
+          type: string
+          example: MetroPCS
+        merchantReferenceCode:
+          description: indicates the SmartPay application_number
+          type: string
+          example: OXXXXXXX
+        orderId:
+          description: order id
+          type: string
+          example: 2086095026
+        purchaseTotals_currency:
+          description: purchase currency
+          type: string
+          example: US
+        purchaseTotals_grandTotalAmount:
+          description: the dollar amount to be captured, which should match the amount used for the preceding auth
+          type: string
+          example: 101.00
+        uuid:
+          description: unique identifier for request
+          type: string
+          example: 1234567890abcdef1234567890abcde
+
+    CaptureOutput:
+      type: object
+      required:
+        - status
+        - vendor
+        - reply
+      properties:
+        errors:
+          type: array
+          items:
+            description: error message
+            type: string
+            example: AuthRequestId not specified
+        reply:
+          "$ref": "#/components/schemas/CaptureOutputReply"
+        status:
+          description: status
+          type: string
+          enum:
+            - success
+            - failed
+          example: success
+        vendor:
+          description: payment processor
+          type: string
+          example: worldpay
+
+    CaptureOutputReply:
+      type: object
+      required:
+        - decision
+      properties:
+        decision:
+          description: indicates if capture is sucessful
+          type: string
+          enum:
+            - accept
+            - reject
+          example: accept
+        orderId:
+          description: order id
+          type: string
+          example: 2086095276
+        raw_response:
+          description: raws response info from payment processor
+          type: object
+          additionalProperties:
+            type: string
+        reasonCode:
+          description: Smartpay response code
+          type: string
+          example: 100
+        requestId:
+          description: capture transaction id
+          type: string
+          example: 04440B
+
+    ReversalInput:
+      type: object
+      required:
+        - ccAuthReversalService_authRequestID
+        - merchant_name
+        - uuid
+      properties:
+        ccAuthReversalService_run:
+          description: auth reversal service run
+          type: string
+          example: true
+        ccAuthReversalService_authRequestID:
+          description: the request id value returned in from the preceding auth
+          type: string
+          example: ch_XXXXXXXXXXXXXXXXX
+        merchant_acquirer:
+          description: merchant acquirer
+          type: string
+          example: worldpay
+        merchant_name:
+          description: merchant name
+          type: string
+          example: Q1W-PagePlusWeb
+        merchantReferenceCode:
+          description: merchant reference code
+          type: string
+          example: OFU8RR7CW
+        orderId:
+          description: order id
+          type: string
+          example:
+        purchaseTotals_currency:
+          description:  currency
+          type: string
+          example: USD
+        purchaseTotals_grandTotalAmount:
+          description: the amount to reverse
+          type: string
+          example: 1.0
+        uuid:
+          description: unique identifier for request
+          type: string
+          example: 1234567890abcdef1234567890abcdef
+    ReversalOutput:
+      type: object
+      required:
+        - status
+        - vendor
+        - reply
+      properties:
+        errors:
+          type: array
+          items:
+            description: error message
+            type: string
+            example: AuthRequestId not specified
+        reply:
+          "$ref": "#/components/schemas/ReversalOutputReply"
+        status:
+          description: status
+          type: string
+          enum:
+            - success
+            - failed
+          example: success
+        vendor:
+          description: payment processor
+          type: string
+          example: worldpay
+    ReversalOutputReply:
+      type: object
+      required:
+        - decision
+      properties:
+        decision:
+          description: indicates if auth reversal is successful
+          type: string
+          enum:
+            - accept
+            - reject
+          example: accept
+        message:
+          description: message
+          type: string
+          example: bf_invalid_request
+        orderId:
+          description: order id
+          type: string
+          example:
+        raw_response:
+          description: raws response info from payment processor
+          type: object
+          additionalProperties:
+            type: string
+        reasonCode:
+          description: Smartpay reason code
+          type: string
+          example: 100
+        requestId:
+          description: auth reversal transaction id
+          type: string
+          example: ch_XXXXXXXXXXXXXXXXX
+    RefundInput:
+      type: object
+      required:
+        - ccRefundService_captureRequestID
+        - merchant_name
+        - uuid
+      properties:
+        app_server:
+          description: indicates which app server sent the request
+          type: string
+          example: app1.sf1.us.billfloat.com
+        card_accountNumber:
+          description: card account number
+          type: string
+          example: 4457010000000009
+        card_cvNumber:
+          description: cv code
+          type: string
+          example: 349
+        card_expirationMonth:
+          description: card expiration month
+          type: string
+          example: 01
+        card_expirationYear:
+          description: card expiration year
+          type: string
+          example: 21
+        ccRefundService_captureRequestID:
+          description: the request id value returned from the preceding capture transaction
+          type: string
+          example: 092065
+        funder:
+          description: indicates who will be funding this lease
+          type: string
+          example: atalaya_ex_westlake
+        merchant_acquirer:
+          description: merchant acquirer
+          type: string
+          example: worldpay
+        merchant_name:
+          description: merchant name
+          type: string
+          example: Walmart
+        merchantReferenceCode:
+          description: merchant reference code
+          type: string
+          example: OE99WWXX1
+        orderId:
+          description: order id
+          type: string
+          example: 22244443333
+        return_amount:
+          description: refund amount
+          type: number
+          format: double
+          example: 101.00
+        uuid:
+          description: unique identifier for request
+          type: string
+          example: 1234567890abcdef1234567890abcdef
+    RefundOutput:
+      type: object
+      required:
+        - status
+        - vendor
+        - reply
+      properties:
+        errors:
+          type: array
+          items:
+            description: error message
+            type: string
+            example: ccRefundService_captureRequestID must be provided for refunding worldpay transaction
+        reply:
+          "$ref": "#/components/schemas/RefundOutputReply"
+        status:
+          type: string
+          enum:
+            - success
+            - failed
+          example: success
+        vendor:
+          description: payment processor
+          type: string
+          example: worldpay
+    RefundOutputReply:
+      type: object
+      required:
+        - decision
+      properties:
+        decision:
+          description: indicates if refund is successful
+          type: string
+          enum:
+            - accept
+            - reject
+          example: accept
+        orderId:
+          description: order id
+          type: string
+          example:
+        raw_response:
+          description: raws response info from payment processor
+          type: object
+          additionalProperties:
+            type: string
+        reasonCode:
+          description: Smartpay reason code
+          type: string
+          example: 100
+        requestId:
+          description: refund transaction id
+          type: string
+          example: 121075
+        merchant_acquirer:
+          description: merchant acquirer
+          type: string
+          example: worldpay
