@@ -1,12 +1,12 @@
 {
-  "name": "svcmocks",
+  "name": "smocks-cli",
   "description": "Manage your servicemocks.com resources",
   "version": "1.0.0",
   "author": "Jeremy Gaerke",
   "bin": {
-    "svcmocks": "./bin/run"
+    "smocks-cli": "./bin/run"
   },
-  "bugs": "https://github.com/https://github.com/servicemocks/svcmocks/svcmocks/issues",
+  "bugs": "https://github.com/servicemocks/smocks-cli/issues",
   "dependencies": {
     "@oclif/command": "^1",
     "@oclif/config": "^1",
@@ -31,7 +31,7 @@
     "/oclif.manifest.json",
     "/src"
   ],
-  "homepage": "https://github.com/https://github.com/servicemocks/svcmocks/svcmocks",
+  "homepage": "https://github.com/servicemocks/smocks-cli",
   "keywords": [
     "oclif"
   ],
@@ -39,13 +39,13 @@
   "main": "src/index.js",
   "oclif": {
     "commands": "./src/commands",
-    "bin": "svcmocks",
+    "bin": "smocks-cli",
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-warn-if-update-available"
     ]
   },
-  "repository": "https://github.com/servicemocks/svcmocks/svcmocks",
+  "repository": "https://github.com/servicemocks/smocks-cli",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "prepack": "oclif-dev manifest && oclif-dev readme",
