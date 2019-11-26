@@ -69,8 +69,8 @@ class PushCommand extends Command {
 
   async run() {
     const {flags} = this.parse(PushCommand)
-    const apiUrlRoot = process.env.SM_API_URL_ROOT || config.apiUrlRoot || 'https://servicemocks.com'
     const config = await getConfig(this.config.configDir)
+    const apiUrlRoot = process.env.SM_API_URL_ROOT || config.apiUrlRoot || 'https://servicemocks.com'
     const workDir = flags['work-dir']
     if (!workDir) {
       this.error('work-dir required', 1)

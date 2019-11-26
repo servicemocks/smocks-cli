@@ -1,7 +1,7 @@
 {
   "name": "smocks-cli",
   "description": "Manage your servicemocks.com resources",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Jeremy Gaerke",
   "bin": {
     "smocks-cli": "./bin/run"
