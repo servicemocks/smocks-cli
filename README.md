@@ -56,7 +56,6 @@ USAGE
 
 OPTIONS
   -k, --api-key=api-key            servicemocks.com api key
-  -u, --api-url-root=api-url-root  [default: https://servicemocks.com] url to api
 ```
 
 _See code: [src/commands/config/set.js](https://github.com/servicemocks/smocks-cli/blob/v1.0.1/src/commands/config/set.js)_
