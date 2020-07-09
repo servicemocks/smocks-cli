@@ -12,6 +12,7 @@ Manage your servicemocks.com resources locally
 * [Commands](#commands)
 
 # Usage
+#
 
 ```sh-session
 $ npm install -g smocks-cli
