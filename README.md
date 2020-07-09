@@ -8,12 +8,11 @@ Manage your servicemocks.com resources locally
 [![Downloads/week](https://img.shields.io/npm/dw/smocks-cli.svg)](https://npmjs.org/package/smocks-cli)
 [![License](https://img.shields.io/npm/l/smocks-cli.svg)](https://github.com/https://github.com/servicemocks/smocks-cli/blob/master/package.json)
 
-<!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
-<!-- tocstop -->
+
 # Usage
-<!-- usage -->
+
 ```sh-session
 $ npm install -g smocks-cli
 $ smocks-cli COMMAND
@@ -25,9 +24,8 @@ USAGE
   $ smocks-cli COMMAND
 ...
 ```
-<!-- usagestop -->
+
 # Commands
-<!-- commands -->
 * [`smocks-cli config:get`](#smocks-cli-configget)
 * [`smocks-cli config:set`](#smocks-cli-configset)
 * [`smocks-cli contract:push`](#smocks-cli-contractpush)
@@ -185,4 +183,3 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
-<!-- commandsstop -->
