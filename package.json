@@ -14,7 +14,7 @@
     "@oclif/plugin-warn-if-update-available": "^1.7.0",
     "app-module-path": "^2.2.0",
     "axios": "^0.19.0",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.0",
     "inquirer": "^7.0.0",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15"
